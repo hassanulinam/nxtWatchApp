@@ -1,5 +1,4 @@
 import {Component} from 'react'
-import Cookies from 'js-cookie'
 
 class Home extends Component {
   state = {sampleVar: true}
