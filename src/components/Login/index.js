@@ -10,6 +10,8 @@ import {
   Input,
   SubmitBtn,
   ErrMsg,
+  Dflex,
+  CheckBox,
 } from './styledComponents'
 
 class Login extends Component {
@@ -77,12 +79,16 @@ class Login extends Component {
           value={passwordInput}
           onChange={this.onChangePasswordInput}
         />
-        <input
-          type="checkbox"
-          onChange={this.onChangeShowPassword}
-          id="showPassword"
-        />
-        <Label htmlFor="showPassword">Show Password</Label>
+        <Dflex>
+          <CheckBox
+            type="checkbox"
+            onChange={this.onChangeShowPassword}
+            id="showPassword"
+          />
+          <Label noMargin htmlFor="showPassword">
+            Show Password
+          </Label>
+        </Dflex>
         <SubmitBtn type="submit">Login</SubmitBtn>
         <ErrMsg>{errMsg}</ErrMsg>
       </LoginForm>

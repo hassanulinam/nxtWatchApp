@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const LoginResponsiveContainer = styled.div`
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,6 +35,8 @@ export const Label = styled.label`
   color: #262626;
   margin-bottom: 8px;
   margin-top: 24px;
+  align-self: flex-start;
+  margin-top: ${props => (props.noMargin ? '8px' : '24px')};
 `
 
 export const Input = styled.input`
@@ -78,4 +81,14 @@ export const ErrMsg = styled.p`
   font-size: 14px;
   line-height: 16px;
   color: #ef4444;
+`
+
+export const Dflex = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  align-self: flex-start;
+`
+export const CheckBox = styled.input`
+  margin-right: 8px;
 `
