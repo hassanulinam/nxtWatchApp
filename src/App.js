@@ -7,6 +7,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Counter from './components/Counter'
 
 import AppContext from './context/AppContext'
+import './App.css'
 
 class App extends Component {
   state = {isDark: false, savedVideos: []}
