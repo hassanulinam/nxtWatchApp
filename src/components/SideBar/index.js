@@ -1,4 +1,3 @@
-import {Link} from 'react-router-dom'
 import {AiFillHome} from 'react-icons/ai'
 import {HiFire} from 'react-icons/hi'
 import {SiYoutubegaming} from 'react-icons/si'
@@ -36,11 +35,18 @@ const SideBar = ({activeRoute}) => {
     <AppContext.Consumer>
       {value => {
         const {isDark} = value
+        const bgColor = isDark ? '#0f0f0f' : '#f4f4f4'
+        const color = !isDark ? '#181818' : '#f9f9f9'
+        const activeBgColor = isDark ? '#424242' : '#cccccc'
+
         return (
-          <SideBarContainer isDark={isDark}>
-            <LinksSection>
-              <LinkContainer isactive={linksActiveness[home]}>
-                <CustomLink as={Link} to={routeConstants.home}>
+          <SideBarContainer color={color} bgColor={bgColor}>
+            <LinksSection color={color}>
+              <LinkContainer
+                activeBg={activeBgColor}
+                isActive={linksActiveness[home]}
+              >
+                <CustomLink color={color} to={routeConstants.home}>
                   <AiFillHome
                     color={iconColors[routeConstants.home]}
                     size="28"
@@ -48,8 +54,11 @@ const SideBar = ({activeRoute}) => {
                   <LinkText>Home</LinkText>
                 </CustomLink>
               </LinkContainer>
-              <LinkContainer isactive={linksActiveness[trending]}>
-                <CustomLink as={Link} to={routeConstants.trending}>
+              <LinkContainer
+                activeBg={activeBgColor}
+                isActive={linksActiveness[trending]}
+              >
+                <CustomLink color={color} to={routeConstants.trending}>
                   <HiFire
                     color={iconColors[routeConstants.trending]}
                     size="28"
@@ -57,8 +66,11 @@ const SideBar = ({activeRoute}) => {
                   <LinkText>Trending</LinkText>
                 </CustomLink>
               </LinkContainer>
-              <LinkContainer isactive={linksActiveness[gaming]}>
-                <CustomLink as={Link} to={routeConstants.gaming}>
+              <LinkContainer
+                activeBg={activeBgColor}
+                isActive={linksActiveness[gaming]}
+              >
+                <CustomLink color={color} to={routeConstants.gaming}>
                   <SiYoutubegaming
                     color={iconColors[routeConstants.gaming]}
                     size="28"
@@ -66,8 +78,11 @@ const SideBar = ({activeRoute}) => {
                   <LinkText>Gaming</LinkText>
                 </CustomLink>
               </LinkContainer>
-              <LinkContainer isactive={linksActiveness[savedVideos]}>
-                <CustomLink as={Link} to={routeConstants.savedVideos}>
+              <LinkContainer
+                activeBg={activeBgColor}
+                isActive={linksActiveness[savedVideos]}
+              >
+                <CustomLink color={color} to={routeConstants.savedVideos}>
                   <CgPlayListAdd
                     color={iconColors[routeConstants.savedVideos]}
                     size="28"

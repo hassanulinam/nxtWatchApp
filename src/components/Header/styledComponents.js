@@ -4,8 +4,7 @@ export const HeaderResponsiveContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: ${props =>
-    props.isDark ? 'rgba(0,0,0,0.7)' : 'rgba(255, 255, 255, 0.7)'};
+  background-color: ${props => props.bgColor};
   backdrop-filter: blur(15px);
   position: fixed;
   top: 0;

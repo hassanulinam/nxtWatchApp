@@ -1,25 +1,31 @@
 import styled from 'styled-components'
 
 export const HomeRouteContainer = styled.div`
-  margin: 0;
-  padding: 0;
+  background-color: ${props => props.bgColor};
+  background-repeat: repeat;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  left: 0;
   width: 100%;
+  height: 100vh;
 `
 
 export const HomeSideBarAndContentsContainer = styled.div`
+  background-color: ${props => props.bgColor};
   display: flex;
 `
 
-export const VideoItemsListContainer = styled.div`
-  position: relative;
+export const VideoItemsListContainer = styled.ul`
+  position: absolute;
   top: 65px;
-  margin: 0 20px;
-  z-index: -20;
+  left: 250px;
   display: flex;
+  justify-content: flex-start;
   flex-wrap: wrap;
+  @media screen and (max-width: 767px) {
+    justify-content: center;
+    left: 0;
+  }
 `
 
 export const BannerCardBgContainer = styled.div`
@@ -60,4 +66,13 @@ export const BannerCloseBtn = styled.button`
   outline: none;
   align-self: flex-start;
   cursor: pointer;
+`
+
+export const DflexCenter = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: ${props => props.margin};
 `

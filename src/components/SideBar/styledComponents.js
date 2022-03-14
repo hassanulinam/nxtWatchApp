@@ -1,16 +1,19 @@
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
 export const SideBarContainer = styled.div`
-  position: sticky;
-  top: 65px;
-  height: 85vh;
-  background-color: ${props => (props.isDark ? '#000000' : '#ffffff')};
-  color: ${props => (!props.isDark ? '#000000' : '#ffffff')};
+  position: fixed;
+  top: 0;
+  padding-top: 60px;
+  height: 100vh;
+  background-color: ${props => props.bgColor};
+  color: ${props => props.color};
+  backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
   min-width: 250px;
   max-width: 250px;
-
+  z-index: 98;
   @media screen and (max-width: 767px) {
     display: none;
   }
@@ -21,8 +24,8 @@ export const LinksSection = styled.div`
   list-style-type: none;
 `
 
-export const CustomLink = styled.div`
-  color: #181818;
+export const CustomLink = styled(Link)`
+  color: ${props => props.color};
   text-decoration: none;
   padding: 10px;
   display: flex;
@@ -31,8 +34,9 @@ export const CustomLink = styled.div`
 
 export const LinkContainer = styled.li`
   width: 100%;
-  background-color: ${props => (props.isactive ? '#10101010' : 'transparent')};
-  font-weight: ${props => (props.isactive ? 'bold' : 'normal')};
+  background-color: ${props =>
+    props.isActive ? props.activeBg : 'transparent'};
+  font-weight: ${props => (props.isActive ? 'bold' : 'normal')};
   font-size: 16px;
 `
 
@@ -43,6 +47,7 @@ export const LinkText = styled.p`
 export const ContactUsSection = styled.div`
   margin-top: auto;
   margin-left: 20px;
+  margin-bottom: 20px;
 `
 
 export const Heading = styled.h1`
