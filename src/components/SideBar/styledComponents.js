@@ -8,7 +8,8 @@ export const SideBarContainer = styled.div`
   color: ${props => (!props.isDark ? '#000000' : '#ffffff')};
   display: flex;
   flex-direction: column;
-  min-width: 200px;
+  min-width: 250px;
+  max-width: 250px;
 
   @media screen and (max-width: 767px) {
     display: none;
@@ -30,10 +31,9 @@ export const CustomLink = styled.div`
 
 export const LinkContainer = styled.li`
   width: 100%;
-  background-color: ${props => (props.isactive ? '#999999' : 'transparent')};
+  background-color: ${props => (props.isactive ? '#10101010' : 'transparent')};
   font-weight: ${props => (props.isactive ? 'bold' : 'normal')};
   font-size: 16px;
-  border-radius: 5px;
 `
 
 export const LinkText = styled.p`
@@ -42,6 +42,7 @@ export const LinkText = styled.p`
 
 export const ContactUsSection = styled.div`
   margin-top: auto;
+  margin-left: 20px;
 `
 
 export const Heading = styled.h1`

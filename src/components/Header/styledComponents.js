@@ -9,10 +9,11 @@ export const HeaderResponsiveContainer = styled.div`
   backdrop-filter: blur(15px);
   position: fixed;
   top: 0;
+  z-index: 99;
 `
 
 export const HeaderContentsWrapper = styled.div`
-  padding: 12px 8px;
+  padding: 12px 16px;
   list-style-type: none;
   width: 100%;
   display: flex;

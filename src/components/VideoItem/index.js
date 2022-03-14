@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 
 import {
   VideoItemContainer,
@@ -13,7 +13,7 @@ import {
 
 const VideoItem = ({VideoDetails}) => {
   const {
-    id,
+    // id,
     title,
     thumbnail_url,
     channel,
@@ -39,7 +39,7 @@ const VideoItem = ({VideoDetails}) => {
           <VideoTitle>{title}</VideoTitle>
           <VideoChannelName>{name}</VideoChannelName>
           <VideoTrends>
-            {view_count} . {published_at}
+            {view_count} views - {published_at}
           </VideoTrends>
         </div>
       </VideoItemBottomSection>
