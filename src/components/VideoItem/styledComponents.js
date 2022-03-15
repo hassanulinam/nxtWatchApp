@@ -33,7 +33,7 @@ export const ProfilePic = styled.img`
   border-radius: 50%;
   margin-right: 10px;
 `
-export const VideoTitle = styled.h1`
+export const VideoTitle = styled.p`
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;

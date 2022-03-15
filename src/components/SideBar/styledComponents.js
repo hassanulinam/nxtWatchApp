@@ -50,7 +50,7 @@ export const ContactUsSection = styled.div`
   margin-bottom: 20px;
 `
 
-export const Heading = styled.h1`
+export const Heading = styled.p`
   font-size: 20px;
   line-height: 48px;
 `

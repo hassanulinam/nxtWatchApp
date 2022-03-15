@@ -5,16 +5,18 @@ export const LoginResponsiveContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${props => props.bgColor};
 `
 
 export const LoginForm = styled.form`
   font-family: 'Roboto';
+  background-color: ${props => props.bgColor};
+  color: ${props => props.color}
   box-shadow: 0 8px 40px rgba(7, 7, 7, 0.3);
   padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #fefeff;
   border-radius: 8px;
 
   @media screen {
@@ -32,7 +34,7 @@ export const Label = styled.label`
   line-height: 16px;
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  color: #262626;
+  color: ${props => props.color};
   margin-bottom: 8px;
   margin-top: 24px;
   align-self: flex-start;
@@ -41,17 +43,18 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   width: 312px;
-  background: #eeeeee;
+  background-color: transparent;
   border-radius: 2px;
-  border: none;
   font-weight: normal;
   font-size: 14px;
   line-height: 24px;
-  color: #262626;
+  color: ${props => props.color};
   padding: 8px 16px;
+  border: 1px solid #909090;
 
   @media screen and (min-width: 768px) {
     width: 360px;
+    font-size: 16px;
   }
 `
 

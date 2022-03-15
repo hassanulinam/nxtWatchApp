@@ -20,7 +20,8 @@ export const HeaderContentsWrapper = styled.div`
   justify-content: space-between;
 `
 
-export const HeaderNavLinksContainer = styled.div`
+export const HeaderNavLinksContainer = styled.ul`
+  list-style-type: none;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -43,11 +44,7 @@ export const MenuButton = styled.button`
 `
 
 export const ProfilePic = styled.img`
-  display: none;
   height: 32px;
-  @media screen and (min-width: 768px) {
-    display: inline;
-  }
 `
 
 export const LogoutSmBtn = styled.button`

@@ -37,17 +37,9 @@ const VideoItem = ({videoDetails}) => {
           <FlexGrowLi>
             <CustomLink color={color} to={`/videos/${id}`}>
               <VideoItemContainer>
-                <VideoThumbnail
-                  alt="video thumbnail"
-                  src={thumbnail_url}
-                  className="animate__animated animate__fadeIn animate__fast"
-                />
+                <VideoThumbnail alt="video thumbnail" src={thumbnail_url} />
                 <VideoItemBottomSection>
-                  <ProfilePic
-                    alt="channel logo"
-                    src={profile_image_url}
-                    className="animate__animated animate__zoomIn animate__slow"
-                  />
+                  <ProfilePic alt="channel logo" src={profile_image_url} />
                   <div>
                     <VideoTitle>{title}</VideoTitle>
                     <VideoChannelName>{name}</VideoChannelName>

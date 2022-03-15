@@ -20,7 +20,7 @@ const FailureView = props => {
 
         return (
           <FailureViewContainer color={color}>
-            <FailureImg alt="failure" src={failureImgUrl} />
+            <FailureImg alt="failure view" src={failureImgUrl} />
             <FailureHeading>Oops! Something Went Wrong</FailureHeading>
             <FailureText>
               We are having some trouble to complete your request. Please try

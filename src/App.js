@@ -4,7 +4,7 @@ import {Switch, Route} from 'react-router-dom'
 import Login from './components/Login'
 import Home from './components/Home'
 import ProtectedRoute from './components/ProtectedRoute'
-import Counter from './components/Counter'
+import NotFound from './components/NotFound'
 
 import AppContext from './context/AppContext'
 import './App.css'
@@ -41,8 +41,8 @@ class App extends Component {
       >
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/count" component={Counter} />
           <ProtectedRoute exact path="/" component={Home} />
+          <Route component={NotFound} />
         </Switch>
       </AppContext.Provider>
     )

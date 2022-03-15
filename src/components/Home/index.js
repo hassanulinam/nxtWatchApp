@@ -20,6 +20,7 @@ import {
   BannerCloseBtn,
   BannerText,
   DflexCenter,
+  LiBanner,
 } from './styledComponents'
 import {WebsiteLogoImg} from '../Login/styledComponents'
 import AppContext from '../../context/AppContext'
@@ -68,8 +69,8 @@ class Home extends Component {
     } else this.setState({apiStatus: apiStatusConstants.failure})
   }
 
-  closeBanner = () => {
-    this.setState(prev => ({showBanner: !prev.showBanner}))
+  closeBanner = async () => {
+    await this.setState({showBanner: false})
     console.log('Closing banner triggered....')
   }
 
@@ -81,18 +82,26 @@ class Home extends Component {
 
   renderBannerSectionView = () => {
     const {showBanner} = this.state
-    if (showBanner === true)
+
+    if (showBanner)
       return (
-        <BannerCardBgContainer>
+        <BannerCardBgContainer
+          data-testid="banner"
+          className="animate__animated animate__fadeInDown animate__fast"
+        >
           <BannerCardTextSection>
-            <WebsiteLogoImg alt="website logo" src={websiteLogoImgUrl} />
+            <WebsiteLogoImg alt="nxt watch logo" src={websiteLogoImgUrl} />
             <BannerText>
               Buy Nxt Watch Premium prepaid plans with UPI
             </BannerText>
             <BannerBuyButton type="button">GET IT NOW</BannerBuyButton>
           </BannerCardTextSection>
-          <BannerCloseBtn type="button">
-            <IoMdClose size={20} color="#181818" onClick={this.closeBanner} />
+          <BannerCloseBtn
+            type="button"
+            data-testid="close"
+            onClick={this.closeBanner}
+          >
+            <IoMdClose size={20} color="#181818" />
           </BannerCloseBtn>
         </BannerCardBgContainer>
       )
@@ -101,8 +110,10 @@ class Home extends Component {
 
   renderVideosListView = () => {
     const {videosData} = this.state
+
     return (
       <VideoItemsListContainer>
+        <LiBanner>{this.renderBannerSectionView()}</LiBanner>
         {videosData.map(item => (
           <VideoItem key={item.id} videoDetails={item} />
         ))}

@@ -22,24 +22,29 @@ export const VideoItemsListContainer = styled.ul`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+  list-style-type: none;
   @media screen and (max-width: 767px) {
     justify-content: center;
     left: 0;
   }
 `
 
+export const LiBanner = styled.li`
+  width: 100%;
+`
+
 export const BannerCardBgContainer = styled.div`
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
   background-size: cover;
   padding: 15px;
-  background-color: white;
+  background-color: ${props => props.bgColor};
   display: flex;
   justify-content: space-between;
   width: 100%;
 `
 
 export const BannerCardTextSection = styled.div`
-  color: #181818;
+  color: ${props => props.color};
   font-weight: 500;
 `
 

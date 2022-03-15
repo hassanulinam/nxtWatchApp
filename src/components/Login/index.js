@@ -2,6 +2,7 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
 
+import AppContext from '../../context/AppContext'
 import {
   LoginResponsiveContainer,
   LoginForm,
@@ -55,25 +56,38 @@ class Login extends Component {
     else this.setState({errMsg: data.error_msg})
   }
 
-  renderLoginForm = () => {
+  renderLoginForm = isDark => {
     const {usernameInput, passwordInput, errMsg, showPassword} = this.state
     const passwordInputType = showPassword ? 'text' : 'password'
+    const formBgColor = isDark ? '#000000' : '#ffffff'
+    const formLabelColor = isDark ? '#f8fafc' : '#1e293b'
+    const formTextColor = isDark ? '#f9f9f9' : '#181818'
+    const websiteLogoImgUrl = isDark
+      ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
+      : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
 
     return (
-      <LoginForm onSubmit={this.onSubmitForm}>
-        <WebsiteLogoImg
-          alt="website logo"
-          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-        />
-        <Label htmlFor="nameInput">USERNAME</Label>
+      <LoginForm
+        onSubmit={this.onSubmitForm}
+        bgColor={formBgColor}
+        color={formTextColor}
+      >
+        <WebsiteLogoImg alt="website logo" src={websiteLogoImgUrl} />
+        <Label color={formLabelColor} htmlFor="nameInput">
+          USERNAME
+        </Label>
         <Input
+          color={formTextColor}
           type="text"
           id="nameInput"
           value={usernameInput}
           onChange={this.onChangeUsernameInput}
         />
-        <Label htmlFor="passwordInput">PASSWORD</Label>
+        <Label color={formLabelColor} htmlFor="passwordInput">
+          PASSWORD
+        </Label>
         <Input
+          color={formTextColor}
           type={passwordInputType}
           id="passwordInput"
           value={passwordInput}
@@ -85,7 +99,7 @@ class Login extends Component {
             onChange={this.onChangeShowPassword}
             id="showPassword"
           />
-          <Label noMargin htmlFor="showPassword">
+          <Label color={formLabelColor} noMargin htmlFor="showPassword">
             Show Password
           </Label>
         </Dflex>
@@ -99,9 +113,18 @@ class Login extends Component {
     const accessToken = Cookies.get('jwt_token')
     if (accessToken !== undefined) return <Redirect to="/" />
     return (
-      <LoginResponsiveContainer>
-        {this.renderLoginForm()}
-      </LoginResponsiveContainer>
+      <AppContext.Consumer>
+        {value => {
+          const {isDark} = value
+          const bgColor = isDark ? '#212121' : '#d7dfe9'
+
+          return (
+            <LoginResponsiveContainer bgColor={bgColor}>
+              {this.renderLoginForm(isDark)}
+            </LoginResponsiveContainer>
+          )
+        }}
+      </AppContext.Consumer>
     )
   }
 }
