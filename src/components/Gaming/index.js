@@ -60,7 +60,7 @@ class Gaming extends Component {
     const {videosData} = this.state
     return (
       <VideoItemsListContainer>
-        <h1>Gaming</h1>
+        <h1 style={{width: '100%'}}>Gaming</h1>
         {videosData.map(item => (
           <GamingVideoItem key={item.id}>
             <CustomLink to={`/videos/${item.id}`} color={color}>
@@ -85,11 +85,7 @@ class Gaming extends Component {
       case apiStatusConstants.success:
         return this.renderVideosListView(color)
       case apiStatusConstants.failure:
-        return (
-          <DflexCenter margin="60px 0">
-            <FailureView retryMethod={this.getVideosData} />
-          </DflexCenter>
-        )
+        return <FailureView retryMethod={this.getVideosData} />
       default:
         return null
     }

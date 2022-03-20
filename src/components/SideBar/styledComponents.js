@@ -8,8 +8,8 @@ export const SideBarContainer = styled.div`
   backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
-  min-width: 250px;
-  max-width: 250px;
+  min-width: 230px;
+  max-width: 230px;
   @media screen and (max-width: 767px) {
     display: none;
   }

@@ -5,9 +5,9 @@ export const GamingVideoItem = styled.li`
   width: 300px;
   padding: 0;
   flex-grow: 1;
-  margin: 15px;
+  padding: 15px;
   @media screen and (max-width: 767px) {
-    margin: 15px 10px;
+    padding: 15px 10px;
   }
 `
 

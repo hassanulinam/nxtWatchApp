@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const WholeRouteContainer = styled.div`
+  margin: 0;
+  padding: 0;
   background-color: ${props => props.bgColor};
   background-repeat: repeat;
   display: flex;
@@ -18,19 +20,24 @@ export const SideBarAndContentsContainer = styled.div`
   overflow-y: hidden;
 `
 
+export const PageContents = styled.div`
+  width: 100%;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+`
+
 export const VideoItemsListContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   list-style-type: none;
   overflow-y: auto;
   width: 100%;
+  padding: 10px;
   @media screen and (max-width: 767px) {
     justify-content: center;
   }
-`
-
-export const LiBanner = styled.li`
-  width: 100%;
 `
 
 export const BannerCardBgContainer = styled.div`
@@ -79,22 +86,21 @@ export const DflexCenter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: ${props => props.margin};
-`
-
-export const LiSearchBarContainer = styled.li`
-  width: 100%;
-  margin: 20px 5px;
 `
 
 export const SearchBoxForm = styled.form`
-  width: 100%;
-  max-width: 500px;
+  width: 90%;
+  max-width: 600px;
   padding: 0;
   display: flex;
   align-items: center;
   border: 1px solid ${props => props.color};
   border-radius: 8px;
+  margin: 10px 15px;
+  @media screen and (max-width: 768px) {
+    margin-right: auto;
+    margin-left: auto;
+  }
 `
 
 export const Input = styled.input`
@@ -105,16 +111,20 @@ export const Input = styled.input`
   font-size: 18px;
   color: ${props => props.color};
   padding: 0 12px;
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+  }
 `
 
 export const SearchButton = styled.button`
-  padding: 10px 25px;
+  padding: 8px 16px;
   background-color: transparent;
   border: none;
   border-left: 1px solid ${props => props.color};
 `
 
-export const LiNoSearchResults = styled.li`
+export const NoSearchResults = styled.div`
+  margin-top: 10%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -125,7 +135,7 @@ export const LiNoSearchResults = styled.li`
 
 export const NoVideosImg = styled.img`
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
 `
 
 export const NoVideosHeading = styled.h1`

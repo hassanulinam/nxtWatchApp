@@ -6,9 +6,9 @@ export const FlexGrowLi = styled.li`
   width: ${props => (props.isWideCard ? '100%' : '300px')};
   padding: 0;
   flex-grow: 1;
-  margin: 15px 8px;
+  padding: 15px 8px;
   @media screen and (max-width: 767px) {
-    margin: 15px 10px;
+    padding: 15px 10px;
   }
 `
 
@@ -21,7 +21,7 @@ export const VideoItemContainer = styled.div`
   width: 100%;
   display: ${props => (props.isFlexRow ? 'flex' : 'auto')};
   align-items: flex-start;
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 1100px) {
     flex-direction: column;
   }
 `

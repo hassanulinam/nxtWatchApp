@@ -21,13 +21,11 @@ import {
   BannerBuyButton,
   BannerCloseBtn,
   BannerText,
-  DflexCenter,
-  LiBanner,
-  LiSearchBarContainer,
   SearchBoxForm,
+  PageContents,
   Input,
   SearchButton,
-  LiNoSearchResults,
+  NoSearchResults,
   NoVideosImg,
   NoVideosHeading,
   NoVideosText,
@@ -64,6 +62,8 @@ class Home extends Component {
       },
     }
     const URL = `https://apis.ccbp.in/videos/all?search=${searchInput}`
+    console.log('Fetching Data with Search input:', searchInput)
+
     const response = await fetch(URL, options)
     if (response.ok) {
       const data = await response.json()
@@ -72,6 +72,15 @@ class Home extends Component {
         apiStatus: apiStatusConstants.success,
       })
     } else this.setState({apiStatus: apiStatusConstants.failure})
+  }
+
+  onChangeSearchInput = e => {
+    this.setState({searchInput: e.target.value})
+  }
+
+  onSubmitForm = e => {
+    e.preventDefault()
+    this.getVideosData()
   }
 
   closeBanner = async () => {
@@ -107,47 +116,48 @@ class Home extends Component {
     return null
   }
 
-  renderVideosListView = () => {
-    const {videosData, searchInput} = this.state
+  renderSearchBox = () => {
+    const {searchInput} = this.state
     const color = '#909090'
 
     return (
+      <SearchBoxForm onSubmit={this.onSubmitForm} color={color}>
+        <Input
+          type="search"
+          value={searchInput}
+          onChange={e => this.setState({searchInput: e.target.value})}
+          color={color}
+        />
+        <SearchButton type="submit" data-testid="searchButton" color={color}>
+          <BsSearch color={color} size={18} />
+        </SearchButton>
+      </SearchBoxForm>
+    )
+  }
+
+  renderNoSearchResultView = () => (
+    <NoSearchResults>
+      <NoVideosImg
+        alt="no videos"
+        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+      />
+      <NoVideosHeading>No Search results found</NoVideosHeading>
+      <NoVideosText>
+        Try different key words or remove search filter
+      </NoVideosText>
+      <RetryBtn onClick={this.getVideosData}>Retry</RetryBtn>
+    </NoSearchResults>
+  )
+
+  renderVideosListView = () => {
+    const {videosData} = this.state
+
+    if (videosData.length === 0) return this.renderNoSearchResultView()
+    return (
       <VideoItemsListContainer>
-        <LiBanner>{this.renderBannerSectionView()}</LiBanner>
-        <LiSearchBarContainer>
-          <SearchBoxForm onSubmit={this.getVideosData} color={color}>
-            <Input
-              type="search"
-              value={searchInput}
-              onChange={e => this.setState({searchInput: e.target.value})}
-              color={color}
-            />
-            <SearchButton
-              type="submit"
-              data-testid="searchButton"
-              color={color}
-            >
-              <BsSearch color={color} size={20} />
-            </SearchButton>
-          </SearchBoxForm>
-        </LiSearchBarContainer>
-        {videosData.length === 0 ? (
-          <LiNoSearchResults>
-            <NoVideosImg
-              alt="no videos"
-              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
-            />
-            <NoVideosHeading>No Search results found</NoVideosHeading>
-            <NoVideosText>
-              Try different key words or remove search filter
-            </NoVideosText>
-            <RetryBtn onClick={this.getVideosData}>Retry</RetryBtn>
-          </LiNoSearchResults>
-        ) : (
-          videosData.map(item => (
-            <VideoItem key={item.id} videoDetails={item} />
-          ))
-        )}
+        {videosData.map(item => (
+          <VideoItem key={item.id} videoDetails={item} />
+        ))}
       </VideoItemsListContainer>
     )
   }
@@ -160,11 +170,7 @@ class Home extends Component {
       case apiStatusConstants.success:
         return this.renderVideosListView()
       case apiStatusConstants.failure:
-        return (
-          <DflexCenter margin="60px 0">
-            <FailureView retryMethod={this.getVideosData} />
-          </DflexCenter>
-        )
+        return <FailureView retryMethod={this.getVideosData} />
       default:
         return null
     }
@@ -182,7 +188,11 @@ class Home extends Component {
               <Header />
               <SideBarAndContentsContainer bgColor={bgColor}>
                 <SideBar activeRoute={currentRoute} />
-                {this.renderHomePageBasedOnAPIStatus()}
+                <PageContents>
+                  {this.renderBannerSectionView()}
+                  {this.renderSearchBox()}
+                  {this.renderHomePageBasedOnAPIStatus()}
+                </PageContents>
               </SideBarAndContentsContainer>
             </WholeRouteContainer>
           )

@@ -1,21 +1,20 @@
 import styled from 'styled-components'
 
 export const FailureViewContainer = styled.div`
+  margin-top: 10%;
   align-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
+  justify-content: center;
+  flex-grow: 1;
   text-align: center;
   color: ${props => props.color};
-
-  @media screen and (max-width: 767px) {
-    width: 200px;
-  }
 `
 
 export const FailureImg = styled.img`
   width: 100%;
+  max-width: 400px;
 `
 
 export const FailureHeading = styled.h1`
