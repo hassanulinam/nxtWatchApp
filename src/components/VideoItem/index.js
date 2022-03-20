@@ -2,6 +2,7 @@
 import {formatDistanceToNow} from 'date-fns'
 
 import AppContext from '../../context/AppContext'
+import routeConstants from '../routeConstants'
 
 import {
   VideoItemContainer,
@@ -15,7 +16,7 @@ import {
   FlexGrowLi,
 } from './styledComponents'
 
-const VideoItem = ({videoDetails}) => {
+const VideoItem = ({videoDetails, activeRoute}) => {
   const {
     id,
     title,
@@ -32,11 +33,14 @@ const VideoItem = ({videoDetails}) => {
         const {isDark} = value
         const color = isDark ? '#f9f9f9' : '#181818'
         const publishedDateToNow = formatDistanceToNow(new Date(published_at))
+        const isWideCard =
+          activeRoute === routeConstants.trending ||
+          activeRoute === routeConstants.savedVideos
 
         return (
-          <FlexGrowLi>
+          <FlexGrowLi isWideCard={isWideCard}>
             <CustomLink color={color} to={`/videos/${id}`}>
-              <VideoItemContainer>
+              <VideoItemContainer isFlexRow={isWideCard}>
                 <VideoThumbnail alt="video thumbnail" src={thumbnail_url} />
                 <VideoItemBottomSection>
                   <ProfilePic alt="channel logo" src={profile_image_url} />
@@ -55,6 +59,11 @@ const VideoItem = ({videoDetails}) => {
       }}
     </AppContext.Consumer>
   )
+}
+
+VideoItem.defaultProps = {
+  activeRoute: routeConstants.home,
+  videoDetails: null,
 }
 
 export default VideoItem

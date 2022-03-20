@@ -5,9 +5,9 @@ export const HeaderResponsiveContainer = styled.div`
   display: flex;
   justify-content: center;
   background-color: ${props => props.bgColor};
-  backdrop-filter: blur(15px);
-  position: fixed;
+  position: sticky;
   top: 0;
+  backdrop-filter: blur(15px);
   z-index: 99;
 `
 

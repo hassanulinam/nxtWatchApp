@@ -46,11 +46,8 @@ const SideBar = ({activeRoute}) => {
                 activeBg={activeBgColor}
                 isActive={linksActiveness[home]}
               >
-                <CustomLink color={color} to={routeConstants.home}>
-                  <AiFillHome
-                    color={iconColors[routeConstants.home]}
-                    size="28"
-                  />
+                <CustomLink color={color} to={home}>
+                  <AiFillHome color={iconColors[home]} size="28" />
                   <LinkText>Home</LinkText>
                 </CustomLink>
               </LinkContainer>
@@ -58,11 +55,8 @@ const SideBar = ({activeRoute}) => {
                 activeBg={activeBgColor}
                 isActive={linksActiveness[trending]}
               >
-                <CustomLink color={color} to={routeConstants.trending}>
-                  <HiFire
-                    color={iconColors[routeConstants.trending]}
-                    size="28"
-                  />
+                <CustomLink color={color} to={trending}>
+                  <HiFire color={iconColors[trending]} size="28" />
                   <LinkText>Trending</LinkText>
                 </CustomLink>
               </LinkContainer>
@@ -70,11 +64,8 @@ const SideBar = ({activeRoute}) => {
                 activeBg={activeBgColor}
                 isActive={linksActiveness[gaming]}
               >
-                <CustomLink color={color} to={routeConstants.gaming}>
-                  <SiYoutubegaming
-                    color={iconColors[routeConstants.gaming]}
-                    size="28"
-                  />
+                <CustomLink color={color} to={gaming}>
+                  <SiYoutubegaming color={iconColors[gaming]} size="28" />
                   <LinkText>Gaming</LinkText>
                 </CustomLink>
               </LinkContainer>
@@ -82,11 +73,8 @@ const SideBar = ({activeRoute}) => {
                 activeBg={activeBgColor}
                 isActive={linksActiveness[savedVideos]}
               >
-                <CustomLink color={color} to={routeConstants.savedVideos}>
-                  <CgPlayListAdd
-                    color={iconColors[routeConstants.savedVideos]}
-                    size="28"
-                  />
+                <CustomLink color={color} to={savedVideos}>
+                  <CgPlayListAdd color={iconColors[savedVideos]} size="28" />
                   <LinkText>Saved videos</LinkText>
                 </CustomLink>
               </LinkContainer>

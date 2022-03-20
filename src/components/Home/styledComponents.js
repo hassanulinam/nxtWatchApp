@@ -1,31 +1,31 @@
 import styled from 'styled-components'
 
-export const HomeRouteContainer = styled.div`
+export const WholeRouteContainer = styled.div`
   background-color: ${props => props.bgColor};
   background-repeat: repeat;
   display: flex;
   flex-direction: column;
-  left: 0;
   width: 100%;
   height: 100vh;
+  overflow-y: hidden;
 `
 
-export const HomeSideBarAndContentsContainer = styled.div`
+export const SideBarAndContentsContainer = styled.div`
+  width: 100%;
+  height: 100%;
   background-color: ${props => props.bgColor};
   display: flex;
+  overflow-y: hidden;
 `
 
 export const VideoItemsListContainer = styled.ul`
-  position: absolute;
-  top: 65px;
-  left: 250px;
   display: flex;
-  justify-content: flex-start;
   flex-wrap: wrap;
   list-style-type: none;
+  overflow-y: auto;
+  width: 100%;
   @media screen and (max-width: 767px) {
     justify-content: center;
-    left: 0;
   }
 `
 
@@ -80,4 +80,60 @@ export const DflexCenter = styled.div`
   justify-content: center;
   align-items: center;
   margin: ${props => props.margin};
+`
+
+export const LiSearchBarContainer = styled.li`
+  width: 100%;
+  margin: 20px 5px;
+`
+
+export const SearchBoxForm = styled.form`
+  width: 100%;
+  max-width: 500px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  border: 1px solid ${props => props.color};
+  border-radius: 8px;
+`
+
+export const Input = styled.input`
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 18px;
+  color: ${props => props.color};
+  padding: 0 12px;
+`
+
+export const SearchButton = styled.button`
+  padding: 10px 25px;
+  background-color: transparent;
+  border: none;
+  border-left: 1px solid ${props => props.color};
+`
+
+export const LiNoSearchResults = styled.li`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`
+
+export const NoVideosImg = styled.img`
+  width: 100%;
+  max-width: 500px;
+`
+
+export const NoVideosHeading = styled.h1`
+  font-size: 28px;
+  font-family: 'Roboto';
+`
+
+export const NoVideosText = styled.p`
+  color: gray;
+  font-size: 18px;
 `

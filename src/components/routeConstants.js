@@ -1,4 +1,5 @@
 const routeConstants = {
+  login: '/login',
   home: '/',
   trending: '/trending',
   gaming: '/gaming',

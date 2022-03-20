@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 export const FlexGrowLi = styled.li`
   list-style-type: none;
-  width: 300px;
+  width: ${props => (props.isWideCard ? '100%' : '300px')};
   padding: 0;
   flex-grow: 1;
   margin: 15px 8px;
@@ -19,10 +19,16 @@ export const CustomLink = styled(Link)`
 
 export const VideoItemContainer = styled.div`
   width: 100%;
+  display: ${props => (props.isFlexRow ? 'flex' : 'auto')};
+  align-items: flex-start;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+  }
 `
 
 export const VideoThumbnail = styled.img`
   width: 100%;
+  max-width: 400px;
 `
 
 export const VideoItemBottomSection = styled.div`

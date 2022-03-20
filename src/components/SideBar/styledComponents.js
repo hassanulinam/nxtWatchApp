@@ -2,9 +2,6 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 
 export const SideBarContainer = styled.div`
-  position: fixed;
-  top: 0;
-  padding-top: 60px;
   height: 100vh;
   background-color: ${props => props.bgColor};
   color: ${props => props.color};
@@ -13,7 +10,6 @@ export const SideBarContainer = styled.div`
   flex-direction: column;
   min-width: 250px;
   max-width: 250px;
-  z-index: 98;
   @media screen and (max-width: 767px) {
     display: none;
   }
@@ -47,7 +43,7 @@ export const LinkText = styled.p`
 export const ContactUsSection = styled.div`
   margin-top: auto;
   margin-left: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 `
 
 export const Heading = styled.p`

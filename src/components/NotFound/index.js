@@ -3,12 +3,14 @@ import Header from '../Header'
 import SideBar from '../SideBar'
 
 import {
+  WholeRouteContainer,
+  SideBarAndContentsContainer,
+} from '../Home/styledComponents'
+import {
   NotFoundCard,
   NotFoundImg,
   NotFoundHeading,
   NotFoundText,
-  NotFoundRouteContainer,
-  SideBarAndNotFoundContents,
 } from './styledComponents'
 
 const NotFound = () => (
@@ -23,9 +25,9 @@ const NotFound = () => (
         : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-light-theme-img.png'
 
       return (
-        <NotFoundRouteContainer bgColor={bgColor}>
+        <WholeRouteContainer bgColor={bgColor}>
           <Header />
-          <SideBarAndNotFoundContents>
+          <SideBarAndContentsContainer>
             <SideBar />
             <NotFoundCard>
               <NotFoundImg alt="not found" src={notFoundImgUrl} />
@@ -34,8 +36,8 @@ const NotFound = () => (
                 We are sorry, the page you requested could not be found.
               </NotFoundText>
             </NotFoundCard>
-          </SideBarAndNotFoundContents>
-        </NotFoundRouteContainer>
+          </SideBarAndContentsContainer>
+        </WholeRouteContainer>
       )
     }}
   </AppContext.Consumer>

@@ -28,3 +28,7 @@ h1 {
 .d-none {
   display: none;
 }
+
+.react-player {
+  width: 100%;
+}

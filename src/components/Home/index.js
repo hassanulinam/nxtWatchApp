@@ -1,18 +1,20 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {IoMdClose} from 'react-icons/io'
-import Loader from 'react-loader-spinner'
+import {BsSearch} from 'react-icons/bs'
 
 import Header from '../Header'
 import SideBar from '../SideBar'
 import VideoItem from '../VideoItem'
 import FailureView from '../FailureView'
+import LoaderView from '../LoaderView'
 
 import routeConstants from '../routeConstants'
+import apiStatusConstants from '../apiStatusConstants'
 import './index.css'
 import {
-  HomeRouteContainer,
-  HomeSideBarAndContentsContainer,
+  WholeRouteContainer,
+  SideBarAndContentsContainer,
   VideoItemsListContainer,
   BannerCardBgContainer,
   BannerCardTextSection,
@@ -21,17 +23,20 @@ import {
   BannerText,
   DflexCenter,
   LiBanner,
+  LiSearchBarContainer,
+  SearchBoxForm,
+  Input,
+  SearchButton,
+  LiNoSearchResults,
+  NoVideosImg,
+  NoVideosHeading,
+  NoVideosText,
 } from './styledComponents'
 import {WebsiteLogoImg} from '../Login/styledComponents'
 import AppContext from '../../context/AppContext'
+import {RetryBtn} from '../FailureView/styledComponents'
 
-const apiStatusConstants = {
-  initial: 'INITIAL',
-  inProgress: 'LOADING',
-  success: 'SUCCESS',
-  failure: 'FAILURE',
-}
-
+const currentRoute = routeConstants.home
 const websiteLogoImgUrl =
   'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
 
@@ -74,12 +79,6 @@ class Home extends Component {
     console.log('Closing banner triggered....')
   }
 
-  renderLoaderView = () => (
-    <div className="loader-container" data-testid="loader">
-      <Loader type="ThreeDots" color="#3b82f6" height="50" width="50" />
-    </div>
-  )
-
   renderBannerSectionView = () => {
     const {showBanner} = this.state
 
@@ -109,14 +108,46 @@ class Home extends Component {
   }
 
   renderVideosListView = () => {
-    const {videosData} = this.state
+    const {videosData, searchInput} = this.state
+    const color = '#909090'
 
     return (
       <VideoItemsListContainer>
         <LiBanner>{this.renderBannerSectionView()}</LiBanner>
-        {videosData.map(item => (
-          <VideoItem key={item.id} videoDetails={item} />
-        ))}
+        <LiSearchBarContainer>
+          <SearchBoxForm onSubmit={this.getVideosData} color={color}>
+            <Input
+              type="search"
+              value={searchInput}
+              onChange={e => this.setState({searchInput: e.target.value})}
+              color={color}
+            />
+            <SearchButton
+              type="submit"
+              data-testid="searchButton"
+              color={color}
+            >
+              <BsSearch color={color} size={20} />
+            </SearchButton>
+          </SearchBoxForm>
+        </LiSearchBarContainer>
+        {videosData.length === 0 ? (
+          <LiNoSearchResults>
+            <NoVideosImg
+              alt="no videos"
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+            />
+            <NoVideosHeading>No Search results found</NoVideosHeading>
+            <NoVideosText>
+              Try different key words or remove search filter
+            </NoVideosText>
+            <RetryBtn onClick={this.getVideosData}>Retry</RetryBtn>
+          </LiNoSearchResults>
+        ) : (
+          videosData.map(item => (
+            <VideoItem key={item.id} videoDetails={item} />
+          ))
+        )}
       </VideoItemsListContainer>
     )
   }
@@ -125,7 +156,7 @@ class Home extends Component {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.inProgress:
-        return this.renderLoaderView()
+        return <LoaderView />
       case apiStatusConstants.success:
         return this.renderVideosListView()
       case apiStatusConstants.failure:
@@ -147,13 +178,13 @@ class Home extends Component {
           const bgColor = isDark ? '#181818' : '#f9f9f9'
 
           return (
-            <HomeRouteContainer data-testid="home" bgColor={bgColor}>
+            <WholeRouteContainer data-testid="home" bgColor={bgColor}>
               <Header />
-              <HomeSideBarAndContentsContainer bgColor={bgColor}>
-                <SideBar activeRoute={routeConstants.home} />
+              <SideBarAndContentsContainer bgColor={bgColor}>
+                <SideBar activeRoute={currentRoute} />
                 {this.renderHomePageBasedOnAPIStatus()}
-              </HomeSideBarAndContentsContainer>
-            </HomeRouteContainer>
+              </SideBarAndContentsContainer>
+            </WholeRouteContainer>
           )
         }}
       </AppContext.Consumer>

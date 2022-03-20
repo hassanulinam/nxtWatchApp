@@ -6,6 +6,7 @@ const AppContext = React.createContext({
   savedVideos: [],
   saveVideo: () => {},
   removeSavedVideo: () => {},
+  videoWasSaved: () => {},
 })
 
 export default AppContext

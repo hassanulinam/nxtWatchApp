@@ -1,42 +1,18 @@
 import styled from 'styled-components'
 
-export const NotFoundRouteContainer = styled.div`
-  background-color: ${props => props.bgColor};
-  background-repeat: repeat;
-  display: flex;
-  flex-direction: column;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-`
-
-export const SideBarAndNotFoundContents = styled.div`
-  background-color: ${props => props.bgColor};
-  display: flex;
-`
-
 export const NotFoundCard = styled.div`
-  position: absolute;
-  top: 65px;
-  left: 250px;
   background-color: ${props => props.bgColor};
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin: 10% 15%;
-  @media screen and (max-width: 767px) {
-    justify-content: center;
-    left: 0;
-    margin: 50% 10%;
-  }
+  justify-content: center;
 `
 
 export const NotFoundImg = styled.img`
-  width: 250px;
-  @media screen and (min-width: 768px) {
-    width: 400px;
-  }
+  width: 80%;
+  max-width: 600px;
 `
 
 export const NotFoundHeading = styled.h1`
