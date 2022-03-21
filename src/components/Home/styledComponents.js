@@ -95,7 +95,7 @@ export const SearchBoxForm = styled.form`
   display: flex;
   align-items: center;
   border: 1px solid ${props => props.color};
-  border-radius: 8px;
+  border-radius: 3px;
   margin: 10px 15px;
   @media screen and (max-width: 768px) {
     margin-right: auto;
@@ -121,6 +121,7 @@ export const SearchButton = styled.button`
   background-color: transparent;
   border: none;
   border-left: 1px solid ${props => props.color};
+  cursor: pointer;
 `
 
 export const NoSearchResults = styled.div`
@@ -136,11 +137,13 @@ export const NoSearchResults = styled.div`
 export const NoVideosImg = styled.img`
   width: 100%;
   max-width: 400px;
+  margin-bottom: 20px;
 `
 
 export const NoVideosHeading = styled.h1`
   font-size: 28px;
   font-family: 'Roboto';
+  color: ${props => props.color};
 `
 
 export const NoVideosText = styled.p`

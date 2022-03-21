@@ -70,6 +70,7 @@ export const SubmitBtn = styled.button`
   text-align: center;
   color: #ffffff;
   margin-top: 8px;
+  cursor: pointer;
 
   @media screen and (min-width: 768px) {
     width: 360px;

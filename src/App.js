@@ -28,17 +28,17 @@ class App extends Component {
       this.setState(prev => ({savedVideos: [...prev.savedVideos, videoItem]}))
   }
 
-  videoWasSaved = videoId => {
-    const {savedVideos} = this.state
-    const i = savedVideos.findIndex(item => item.id === videoId)
-    if (i === -1) return false
-    return true
-  }
-
   removeSavedVideo = videoId => {
     const {savedVideos} = this.state
     const filteredVideos = savedVideos.filter(item => item.id !== videoId)
     this.setState({savedVideos: filteredVideos})
+  }
+
+  wasSavedAlready = videoId => {
+    const {savedVideos} = this.state
+    const i = savedVideos.findIndex(item => item.id === videoId)
+    if (i === -1) return false
+    return true
   }
 
   render() {
@@ -52,7 +52,7 @@ class App extends Component {
           savedVideos,
           addSavedVideo: this.addSavedVideo,
           removeSavedVideo: this.removeSavedVideo,
-          videoWasSaved: this.videoWasSaved,
+          wasSavedAlready: this.wasSavedAlready,
         }}
       >
         <Switch>

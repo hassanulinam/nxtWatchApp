@@ -27,23 +27,27 @@ class Trending extends Component {
 
   getVideosData = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
-    const accessToken = Cookies.get('jwt_token')
-    const options = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
+    try {
+      const accessToken = Cookies.get('jwt_token')
+      const options = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+      const URL = `https://apis.ccbp.in/videos/trending`
+      const response = await fetch(URL, options)
+      if (response.ok) {
+        const data = await response.json()
+        this.setState({
+          videosData: data.videos,
+          apiStatus: apiStatusConstants.success,
+        })
+      } else this.setState({apiStatus: apiStatusConstants.failure})
+    } catch (err) {
+      this.setState({apiStatus: apiStatusConstants.failure})
     }
-    const URL = `https://apis.ccbp.in/videos/trending`
-    const response = await fetch(URL, options)
-    if (response.ok) {
-      const data = await response.json()
-      this.setState({
-        videosData: data.videos,
-        apiStatus: apiStatusConstants.success,
-      })
-    } else this.setState({apiStatus: apiStatusConstants.failure})
   }
 
   renderTrendingContents = () => {

@@ -37,4 +37,5 @@ export const RetryBtn = styled.button`
   font-size: 17px;
   font-weight: 600;
   margin-top: 20px;
+  cursor: pointer;
 `

@@ -34,7 +34,6 @@ class VideoItemDetails extends Component {
   state = {
     apiStatus: apiStatusConstants.initial,
     videoDetails: {},
-    isSaved: false,
     isLiked: false,
     isDisliked: false,
   }
@@ -55,40 +54,35 @@ class VideoItemDetails extends Component {
     else this.setState({isDisliked: true, isLiked: false})
   }
 
-  toggleSave = () => {
-    this.setState(p => ({isSaved: !p.isSaved}))
-  }
-
-  wasSaved = () => {
-    this.setState({isSaved: true})
-    return null
-  }
-
   getVideoDetailsData = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
-    const {match} = this.props
-    const {params} = match
-    const {id} = params
-    const accessToken = Cookies.get('jwt_token')
-    const options = {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+    try {
+      const {match} = this.props
+      const {params} = match
+      const {id} = params
+      const accessToken = Cookies.get('jwt_token')
+      const options = {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+      const URL = `https://apis.ccbp.in/videos/${id}`
+      const response = await fetch(URL, options)
+      if (response.ok) {
+        const data = await response.json()
+        this.setState({
+          videoDetails: data.video_details,
+          apiStatus: apiStatusConstants.success,
+        })
+      } else this.setState({apiStatus: apiStatusConstants.failure})
+    } catch (err) {
+      this.setState({apiStatus: apiStatusConstants.failure})
     }
-    const URL = `https://apis.ccbp.in/videos/${id}`
-    const response = await fetch(URL, options)
-    if (response.ok) {
-      const data = await response.json()
-      this.setState({
-        videoDetails: data.video_details,
-        apiStatus: apiStatusConstants.success,
-      })
-    } else this.setState({apiStatus: apiStatusConstants.failure})
   }
 
   renderVideoDetails = () => {
-    const {videoDetails, isSaved, isLiked, isDisliked} = this.state
+    const {videoDetails, isLiked, isDisliked} = this.state
     const {
       id,
       title,
@@ -101,12 +95,13 @@ class VideoItemDetails extends Component {
     const timeDistance = formatDistanceToNow(new Date(published_at))
     const likeBtnColor = isLiked ? '#2563eb' : '#64748b'
     const dislikeBtnColor = isDisliked ? '#2563eb' : '#64748b'
-    const saveBtnColor = isSaved ? '#2563eb' : '#64748b'
 
     return (
       <AppContext.Consumer>
         {value => {
-          const {addSavedVideo, removeSavedVideo, videoWasSaved} = value
+          const {addSavedVideo, removeSavedVideo, wasSavedAlready} = value
+          const isSaved = wasSavedAlready(id)
+          const saveBtnColor = isSaved ? '#2563eb' : '#64748b'
           return (
             <VideoDetailsContainer>
               <ReactPlayer url={video_url} width="80%" height="80%" />
@@ -120,18 +115,17 @@ class VideoItemDetails extends Component {
                 <FlexRow>
                   <TrendButton color={likeBtnColor} onClick={this.onLike}>
                     <BiLike color={likeBtnColor} size={20} />
-                    <p>Like</p>
+                    Like
                   </TrendButton>
                   <TrendButton color={dislikeBtnColor} onClick={this.onDislike}>
                     <BiDislike color={dislikeBtnColor} size={20} />
-                    <p>Dislike</p>
+                    Dislike
                   </TrendButton>
                   <TrendButton
                     color={saveBtnColor}
                     onClick={() => {
                       if (isSaved) removeSavedVideo(id)
                       else addSavedVideo(videoDetails)
-                      this.toggleSave()
                     }}
                   >
                     <MdPlaylistAdd color={saveBtnColor} size={20} />
@@ -178,7 +172,6 @@ class VideoItemDetails extends Component {
         {value => {
           const {isDark} = value
           const bgColor = isDark ? '#0f0f0f' : '#ebebeb'
-          const color = isDark ? '#f9f9f9' : '#181818'
 
           return (
             <WholeRouteContainer

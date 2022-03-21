@@ -12,7 +12,6 @@ import {
   WholeRouteContainer,
   SideBarAndContentsContainer,
   VideoItemsListContainer,
-  DflexCenter,
 } from '../Home/styledComponents'
 import {
   GamingVideoItem,
@@ -37,23 +36,27 @@ class Gaming extends Component {
 
   getVideosData = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
-    const accessToken = Cookies.get('jwt_token')
-    const options = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
+    try {
+      const accessToken = Cookies.get('jwt_token')
+      const options = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+      const URL = `https://apis.ccbp.in/videos/gaming`
+      const response = await fetch(URL, options)
+      if (response.ok) {
+        const data = await response.json()
+        this.setState({
+          videosData: data.videos,
+          apiStatus: apiStatusConstants.success,
+        })
+      } else this.setState({apiStatus: apiStatusConstants.failure})
+    } catch (err) {
+      this.setState({apiStatus: apiStatusConstants.failure})
     }
-    const URL = `https://apis.ccbp.in/videos/gaming`
-    const response = await fetch(URL, options)
-    if (response.ok) {
-      const data = await response.json()
-      this.setState({
-        videosData: data.videos,
-        apiStatus: apiStatusConstants.success,
-      })
-    } else this.setState({apiStatus: apiStatusConstants.failure})
   }
 
   renderVideosListView = color => {
@@ -97,7 +100,7 @@ class Gaming extends Component {
         {value => {
           const {isDark} = value
           const color = isDark ? '#f9f9f9' : '#181818'
-          const bgColor = isDark ? '#181818' : '#f9f9f9'
+          const bgColor = isDark ? '#0f0f0f' : '#f9f9f9'
 
           return (
             <WholeRouteContainer data-testid="gaming" bgColor={bgColor}>

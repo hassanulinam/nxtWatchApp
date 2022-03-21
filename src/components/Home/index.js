@@ -52,26 +52,31 @@ class Home extends Component {
 
   getVideosData = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
-    const {searchInput} = this.state
-    const accessToken = Cookies.get('jwt_token')
-    const options = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-    const URL = `https://apis.ccbp.in/videos/all?search=${searchInput}`
-    console.log('Fetching Data with Search input:', searchInput)
+    try {
+      const {searchInput} = this.state
+      const accessToken = Cookies.get('jwt_token')
+      const options = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+      const URL = `https://apis.ccbp.in/videos/all?search=${searchInput}`
+      console.log('Fetching Data with Search input:', searchInput)
 
-    const response = await fetch(URL, options)
-    if (response.ok) {
-      const data = await response.json()
-      this.setState({
-        videosData: data.videos,
-        apiStatus: apiStatusConstants.success,
-      })
-    } else this.setState({apiStatus: apiStatusConstants.failure})
+      const response = await fetch(URL, options)
+      if (response.ok) {
+        const data = await response.json()
+        this.setState({
+          videosData: data.videos,
+          apiStatus: apiStatusConstants.success,
+        })
+      } else this.setState({apiStatus: apiStatusConstants.failure})
+    } catch (err) {
+      console.log('NETWORK ERROR')
+      this.setState({apiStatus: apiStatusConstants.failure})
+    }
   }
 
   onChangeSearchInput = e => {
@@ -124,24 +129,32 @@ class Home extends Component {
       <SearchBoxForm onSubmit={this.onSubmitForm} color={color}>
         <Input
           type="search"
+          placeholder="Search"
           value={searchInput}
           onChange={e => this.setState({searchInput: e.target.value})}
           color={color}
         />
-        <SearchButton type="submit" data-testid="searchButton" color={color}>
+        <SearchButton
+          type="button"
+          data-testid="searchButton"
+          color={color}
+          onClick={this.getVideosData}
+        >
           <BsSearch color={color} size={18} />
         </SearchButton>
       </SearchBoxForm>
     )
   }
 
-  renderNoSearchResultView = () => (
+  renderNoSearchResultView = isDark => (
     <NoSearchResults>
       <NoVideosImg
         alt="no videos"
         src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
       />
-      <NoVideosHeading>No Search results found</NoVideosHeading>
+      <NoVideosHeading color={isDark ? '#f9f9f9' : '#0f0f0f'}>
+        No Search results found
+      </NoVideosHeading>
       <NoVideosText>
         Try different key words or remove search filter
       </NoVideosText>
@@ -149,10 +162,10 @@ class Home extends Component {
     </NoSearchResults>
   )
 
-  renderVideosListView = () => {
+  renderVideosListView = isDark => {
     const {videosData} = this.state
 
-    if (videosData.length === 0) return this.renderNoSearchResultView()
+    if (videosData.length === 0) return this.renderNoSearchResultView(isDark)
     return (
       <VideoItemsListContainer>
         {videosData.map(item => (
@@ -162,13 +175,13 @@ class Home extends Component {
     )
   }
 
-  renderHomePageBasedOnAPIStatus = () => {
+  renderHomePageBasedOnAPIStatus = isDark => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.inProgress:
         return <LoaderView />
       case apiStatusConstants.success:
-        return this.renderVideosListView()
+        return this.renderVideosListView(isDark)
       case apiStatusConstants.failure:
         return <FailureView retryMethod={this.getVideosData} />
       default:
@@ -191,7 +204,7 @@ class Home extends Component {
                 <PageContents>
                   {this.renderBannerSectionView()}
                   {this.renderSearchBox()}
-                  {this.renderHomePageBasedOnAPIStatus()}
+                  {this.renderHomePageBasedOnAPIStatus(isDark)}
                 </PageContents>
               </SideBarAndContentsContainer>
             </WholeRouteContainer>
