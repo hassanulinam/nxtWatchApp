@@ -18,7 +18,7 @@ const NotFound = () => (
     {value => {
       const {isDark} = value
       const hColor = isDark ? '#f9f9f9' : '#181818'
-      const pColor = isDark ? '#94a3b8' : '##212121'
+      const pColor = isDark ? '#94a3b8' : '#212121'
       const bgColor = isDark ? '#231f20' : '#ebebeb'
       const notFoundImgUrl = isDark
         ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-dark-theme-img.png'
