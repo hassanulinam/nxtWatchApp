@@ -11,7 +11,7 @@ export const LoginResponsiveContainer = styled.div`
 export const LoginForm = styled.form`
   font-family: 'Roboto';
   background-color: ${props => props.bgColor};
-  color: ${props => props.color}
+  color: ${props => props.color};
   box-shadow: 0 8px 40px rgba(7, 7, 7, 0.3);
   padding: 24px;
   display: flex;
